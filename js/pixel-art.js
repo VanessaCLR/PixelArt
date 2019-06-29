@@ -22,25 +22,30 @@ var nombreColores = ['White', 'LightYellow',
 
 //Variable para guardar colores de paleta"
 var paleta = document.getElementById('paleta');
+
 //Captura de click sobre paleta de colores//
 paleta.addEventListener("click", indicador);
+
 //Función que muestra previsualización de color de la paleta//
 function indicador(e) {
-    var color = e.target.style.backgroundColor;
-    var indicadorColor = document.getElementById("indicador-de-color");
-    indicadorColor.style.backgroundColor = color;
+  var color = e.target.style.backgroundColor;
+  var indicadorColor = document.getElementById("indicador-de-color");
+  indicadorColor.style.backgroundColor = color;
 };
+
 //Variable para guardar pixeles en la grilla//
 var grillaPixeles = document.getElementById('grilla-pixeles');
+
 //Captura de click sobre grilla de pixeles a colorear//
 grillaPixeles.addEventListener("click", pintarPixel);
+
 //Función que colorea pixeles de grilla//
 function pintarPixel(e) {
-    var pixel = e.target;
-    var colorPaleta= document.getElementById("indicador-de-color");
-    pixel.style.backgroundColor = colorPaleta.style.backgroundColor;
-
+  var pixel = e.target;
+  var colorPaleta = document.getElementById("indicador-de-color");
+  pixel.style.backgroundColor = colorPaleta.style.backgroundColor;
 };
+
 //Función que recorre colores y crea posición en la paleta de cada color//
 function recorrerColores() {
   for (i = 0; i < nombreColores.length; i++) {
@@ -53,6 +58,7 @@ function recorrerColores() {
   }
 };
 recorrerColores();
+
 //Función que crea la grilla//
 function grillaPixel() {
   for (i = 0; i < 1750; i++) {
@@ -79,22 +85,65 @@ colorPersonalizado.addEventListener('change',
   })
 );
 
+//Pintar con movimiento 
 var estadoMouse = document.getElementById("grilla-pixeles");
 var mouse = null;
 estadoMouse.addEventListener("mousedown", apretado);
 estadoMouse.addEventListener("mouseover", pintar)
 estadoMouse.addEventListener("mouseup", noApretado);
 
-function apretado(){
+function apretado() {
   mouse = true;
 };
 
-function noApretado(){
+function noApretado() {
   mouse = false;
 };
 
-function pintar(e){
-    if(mouse){
-      pintarPixel(e);
-    };
+function pintar(e) {
+  if (mouse) {
+    pintarPixel(e);
+  };
 };
+
+//Borrar imagenes 
+$(document).ready(function () {
+  var borrarTodo = $("#borrar");
+  var borrarPixeles = $(".cursor-personalizado");
+  $(borrarTodo).click(function () {
+    $(borrarPixeles).animate({"background-color": "white"}, 300);
+
+  });
+});
+
+//Cargar imagenes de superheroes 
+var cargarImagenBatman = document.getElementById("batman");
+var cargarImagenWonder = document.getElementById("wonder");
+var cargarImagenFlash = document.getElementById("flash");
+var cargarImagenInvisible = document.getElementById("invisible");
+//Eventos del mouse para pintar
+cargarImagenBatman.addEventListener("click", cargarBatman);
+cargarImagenWonder.addEventListener("click", cargarWonder);
+cargarImagenFlash.addEventListener("click", cargarFlash);
+cargarImagenInvisible.addEventListener("click", cargarInvisible);
+//Funciones que llaman a Cargar cada superheroe en función del evento del mouse
+function cargarBatman() {
+  cargarSuperheroe(batman);
+};
+function cargarWonder() {
+  cargarSuperheroe(wonder);
+};
+function cargarFlash() {
+  cargarSuperheroe(flash);
+};
+function cargarInvisible() {
+  cargarSuperheroe(invisible);
+};
+
+//Guardar imagenes 
+var guardarArchivo = document.getElementById("guardar");
+guardarArchivo.addEventListener("click", guardarPixelArt);
+
+
+
+
